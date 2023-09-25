@@ -6,7 +6,7 @@ function App() {
 		if (result.credential) {
 			const params = { token: result.credential };
 			axios
-			.post("http://localhost:3000/user/google", params)
+			.post("http://localhost:3000/patient/google", params)
 			.then((res) => {
 				console.log(res.data);
 				// set token in local storage/cookies based on your authentication method

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Our App, <%= @patient.given_name %> 🚀</h1>
+    <p>
+      You have successfully signed up. Your username is: <%= @patient.email %>.<br>
+      Your temporary password is <strong><%= @temporary_password %></strong>. <br><br>
+
+      You can proceed to your account dashboard to update your password.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
