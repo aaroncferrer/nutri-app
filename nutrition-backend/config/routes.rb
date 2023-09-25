@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  post 'patient/google' => 'patient_auth#google' 
+  post 'patient/signup', to: 'patient_auth#signup'
+  post 'patient/login', to: 'patient_auth#login'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :patients, only: [:update]
 end
