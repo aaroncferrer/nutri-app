@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  post 'user/google' => 'users#google' # This maps the /user/google route to the UsersController's google action
 end
