@@ -10,13 +10,13 @@ class Patient < ApplicationRecord
 
 	has_secure_password
 
-	# validate :unique_email_across_models, on: :create
+	validate :unique_email_across_models, on: :create
 
-	# private
+	private
 
-	# def unique_email_across_models
-	# 		if Dietitian.exists?(email: email) || Patient.exists?(email: email)
-	# 				errors.add(:email, 'is already taken')
-	# 		end
-	# end
+	def unique_email_across_models
+		if Dietitian.exists?(email: email) || Patient.exists?(email: email)
+				errors.add(:email, 'is already taken')
+		end
+	end
 end

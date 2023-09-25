@@ -1,0 +1,2 @@
+class Dietitian < ApplicationRecord
+end

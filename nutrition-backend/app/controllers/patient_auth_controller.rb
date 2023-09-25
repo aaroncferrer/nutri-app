@@ -1,6 +1,8 @@
 require 'jwt_auth'
 
 class PatientAuthController < ApplicationController
+  skip_before_action :check_auth
+
   def google
     begin
       access_token = params[:token]
