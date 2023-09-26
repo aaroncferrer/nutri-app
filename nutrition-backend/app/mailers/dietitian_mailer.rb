@@ -1,0 +1,2 @@
+class DietitianMailer < ApplicationMailer
+end

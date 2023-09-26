@@ -6,13 +6,13 @@ class ApplicationController < ActionController::API
     if token
       begin
         decoded_token = JwtAuth.decode(token)
-        admin_id = decoded_token['admin_id']
-        trader_id = decoded_token['trader_id']
+        patient_id = decoded_token['patient_id']
+        dietitian_id = decoded_token['dietitian_id']
 
-        if admin_id
-          @current_user = Admin.find(admin_id)
-        elsif trader_id
-          @current_user = Trader.find(trader_id)
+        if patient_id
+          @current_user = Patient.find(patient_id)
+        elsif dietitian_id
+          @current_user = Dietitian.find(dietitian_id)
         end
       rescue JWT::DecodeError, ActiveRecord::RecordNotFound
         render json: { error: 'Invalid token or user not found' }, status: :unauthorized

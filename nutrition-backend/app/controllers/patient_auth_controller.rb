@@ -29,7 +29,7 @@ class PatientAuthController < ApplicationController
       end
       
       token = JwtAuth.encode({ patient_id: patient.id })
-      render json: { token: token, patient: patient.as_json(only: [:id, :given_name, :family_name, :email]), data: data }, status: :ok
+      render json: { token: token, patient: patient.as_json(only: [:id, :given_name, :family_name, :email, :role]), data: data }, status: :ok
 
     rescue StandardError => e
       render json: { error: e.message }, status: :unprocessable_entity
@@ -50,7 +50,7 @@ class PatientAuthController < ApplicationController
     patient = Patient.find_by(email: params[:email])
     if patient&.authenticate(params[:password])
       token = JwtAuth.encode({ patient_id: patient.id })
-      render json: { token: token, patient: patient.as_json(only: [:id, :given_name, :family_name, :email]) }, status: :ok
+      render json: { token: token, patient: patient.as_json(only: [:id, :given_name, :family_name, :email, :role]) }, status: :ok
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
