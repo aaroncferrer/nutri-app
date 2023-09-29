@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "PatientAuthController", type: :request do
+RSpec.describe "PatientAuths", type: :request do
   # POST Google SignIn
 
   # POST Patient Signup
