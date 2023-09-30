@@ -6,7 +6,7 @@ class DietitianAuthController < ApplicationController
   def google
     begin
       access_token = params[:token]
-      data = Google::Auth::IDTokens.verify_oidc(access_token, aud: "1097164830695-qu5q175nq3r8bc5qvgo180n3lkvt1p8o.apps.googleusercontent.com")
+      data = Google::Auth::IDTokens.verify_oidc(access_token, aud: ENV['GOOGLE_CLIENT_ID'])
 
       dietitian = Dietitian.find_by(email: data['email'])
 
