@@ -1,0 +1,32 @@
+#landing_hero {
+    height: 100vh;
+    position: relative;
+    background-image: url('../../assets/fruit-bg5.jpeg');
+    background-size: cover; 
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing_hero_logo_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.landing_hero_logo {
+    width: 75%;
+}
+
+.landing_hero_text {
+    position: absolute;
+    color: white;
+    transform: translate(-30px, 37px);
+    font-family: var(--font-secondary);
+    font-style: italic;
+}

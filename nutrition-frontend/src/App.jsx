@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
+// import Landing from "./pages/Landing";
+// import NavHeader from "./components/NavHeader";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import GoogleSignIn from "./components/GoogleSignIn";
 
 function App() {
+	const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser')) || null)
+
+	useEffect(() => {
+		localStorage.setItem('currentUser', JSON.stringify(currentUser))
+	}, [currentUser])
 	const [eventTypes, setEventTypes] = useState([]);
 
 	useEffect(() => {
@@ -19,8 +26,7 @@ function App() {
 	}, []); 
 
 	return (
-		<div className="App">
-			<GoogleSignIn />
+		<>
 			<p>Select a scheduling link:</p>
 			<ul>
 				{eventTypes.map((eventType) => (
@@ -31,7 +37,11 @@ function App() {
 				</li>
 				))}
 			</ul>
-		</div>
+		</>
+		// <>	
+		// 	<NavHeader />
+		// 	<Landing />
+		// </>
 	)
 }
 
