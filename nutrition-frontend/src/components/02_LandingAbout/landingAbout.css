@@ -1,0 +1,64 @@
+#landing_about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing_about_top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-green);
+    padding: 2rem 0;
+}
+
+.landing_about_top img {
+    width: 55%;
+}
+
+.landing_about_bottom {
+    width: 100%;
+    background-color: var(--color-yellow);
+    padding: 8rem 0;
+    background-image: url('../../assets/bg-texture01.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.landing_about_text_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.landing_about_text {
+    width: 40%;
+    font-family: var(--font-alternative);
+    color: var(--color-blue);
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 1024px){
+    .landing_about_top img {
+        width: 75%;
+    }
+    .landing_about_text {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .landing_about_top img {
+        width: 100%;
+    }
+    .landing_about_text {
+        font-size: 1.2rem;
+        width: 82.5%;
+    }
+}
