@@ -2,6 +2,7 @@
     height: 100vh;
     position: relative;
     background-image: url('../../assets/fruit-bg5.jpeg');
+    background-attachment: fixed;
     background-size: cover; 
     background-repeat: no-repeat;
     display: flex;
