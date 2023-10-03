@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Landing from "./pages/Landing";
 import NavHeader from "./components/NavHeader";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // import axios from 'axios';
 
 function App() {
@@ -10,6 +12,10 @@ function App() {
 	useEffect(() => {
 		localStorage.setItem('currentUser', JSON.stringify(currentUser))
 	}, [currentUser])
+
+	useEffect(() => {
+		AOS.init({duration: 1000, anchorPlacement: 'center-bottom'})
+	}, [])
 	// const [eventTypes, setEventTypes] = useState([]);
 
 	// useEffect(() => {

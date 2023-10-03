@@ -5,7 +5,7 @@ import logo from '../../assets/logo_blue-plain.png';
 
 function NavHeader() {
   return (
-	<Navbar expand="lg" className="nav" fixed="top">
+	<Navbar expand="lg" className="nav">
         <img className='nav_logo' src={logo}></img>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
