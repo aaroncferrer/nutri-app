@@ -11,6 +11,7 @@
 :root {
 	--color-blue: #9ebec9;
 	--color-green: #84c393;
+	--color-yellow: #f9f8e4;
 	--color-neutral: #b3b1b0;
 	--color-light: #f4f5f8;
 
@@ -39,10 +40,10 @@ body {
  	 margin: 0 auto;
 }
 
-section {
-  	margin-top: 8rem;
-}
-
 a {
 	text-decoration: none;
+}
+
+.strong {
+	font-weight: bold;
 }
