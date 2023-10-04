@@ -3,14 +3,12 @@
     justify-content: center;
     align-items: center;
     background-color: var(--color-light);
-    position: sticky; /* Change position to sticky */
-    top: 0; /* Stick to the top of the viewport */
-    z-index: 100; /* Ensure it's above other content */
 }
 
 .nav_logo {
     width: 12%;
     margin: 0 2rem;
+    cursor: pointer;
 }
 
 .nav_actions {
@@ -24,6 +22,7 @@
     font-size: 0.9rem;
     color: var(--color-blue);
     position: relative;
+    cursor: pointer;
 }
 
 .nav_links::before {
@@ -48,22 +47,7 @@
 }
 
 .nav_btn {
-    border: none;
-    background-color: var(--color-blue);
     margin-right: 2rem;
-    font-family: var(--font-secondary);
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 0.5rem 1.5rem;
-    color: var(--color-light);
-    border-radius: 5px;
-}
-
-.nav_btn:hover {
-    outline: 1px solid var(--color-blue);
-    background-color: transparent;
-    color: var(--color-blue);
-    transition: var(--transition);
 }
 
 .navbar-toggler {

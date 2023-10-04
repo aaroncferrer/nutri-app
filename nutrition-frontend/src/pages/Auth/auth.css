@@ -1,0 +1,97 @@
+.auth {
+    height: 100vh;
+    background-image: url('../../assets/fruit-bg2-edited2.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.auth_card h3 {
+    font-weight: bold;
+}
+
+.auth_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--color-light);
+    margin-right: 9rem;
+    padding: 2rem;
+    gap: 1rem;
+    width: 27.5%;
+    transform: translateY(-2.5rem);
+    font-family: var(--font-secondary);
+    border-radius: 3%;
+    box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+}
+
+.or_line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.or_line::before,
+.or_line::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background-color: black; 
+    margin: 0.5rem; 
+}
+
+.google_container {
+    display: flex;
+    justify-content: center;
+}
+
+.auth_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth_form input, .auth_form button {
+    width: 100%;
+}
+
+.auth_form input {
+    font-family: var(--font-secondary);
+    padding: 0.7rem 1rem;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.auth_card h6 {
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.auth_form button {
+    margin: 1.75rem 0 0.5rem;
+}
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 1024px){
+    .auth {
+        background-position: left;
+        align-items: center;
+    }
+    .auth_card {
+        margin-right: 0;
+        width: 65%;
+        transform: translateY(-12rem);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .auth_card {
+        margin-right: 0;
+        width: 90%;
+        transform: translateY(-2rem);
+    }
+}
