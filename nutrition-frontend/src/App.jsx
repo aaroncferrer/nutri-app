@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
+
+// File Imports
 import Landing from "./pages/Landing";
 import NavHeader from "./components/NavHeader";
+
+// Library/Packages
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
+import AOS from 'aos';
+import Auth from "./pages/Auth";
 // import axios from 'axios';
 
 function App() {
@@ -44,10 +50,13 @@ function App() {
 		// 		))}
 		// 	</ul>
 		// </>
-		<>	
+		<Router>	
 			<NavHeader />
-			<Landing />
-		</>
+			<Routes>
+				<Route exact path="/" element={<Landing />} />
+				<Route exact path="/auth" element={<Auth />} />
+			</Routes>
+		</Router>
 	)
 }
 

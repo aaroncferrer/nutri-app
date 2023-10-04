@@ -3,10 +3,10 @@ import LandingAbout from "../../components/02_LandingAbout";
 
 function Landing() {
     return(
-        <>
+        <main className="landing">
             <LandingHeader />
             <LandingAbout />
-        </>
+        </main>
     )
 }
 
