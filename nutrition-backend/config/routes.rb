@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   post 'dietitian/signup', to: 'dietitian_auth#signup'
   post 'dietitian/login', to: 'dietitian_auth#login'
 
-  get '/get_user_event_types', to: 'calendly#user_event_types'
+  get 'get_user_event_types', to: 'calendly#user_event_types'
+  
+  resources :appointments, only: [:create]
 
   resources :patients, only: [:update]
 end
