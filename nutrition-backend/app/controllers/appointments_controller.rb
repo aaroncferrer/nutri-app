@@ -1,5 +1,10 @@
 class AppointmentsController < ApplicationController
-  skip_before_action :check_auth
+  skip_before_action :check_auth, only: :create
+
+  def index
+    appointments = @current_user.appointments
+    render json: appointments
+  end
 
   def create
     # Parse the JSON payload from the Calendly webhook
@@ -33,5 +38,4 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  # ...
 end
