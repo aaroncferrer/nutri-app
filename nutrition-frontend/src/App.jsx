@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import Auth from "./pages/Auth";
+import Footer from "./components/Footer";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser')) || null)
@@ -30,6 +31,7 @@ function App() {
 				<Route exact path="/" element={<Landing />} />
 				<Route exact path="/auth" element={<Auth />} />
 			</Routes>
+			<Footer />
 		</Router>
 	)
 }

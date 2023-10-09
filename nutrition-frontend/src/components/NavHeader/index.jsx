@@ -20,7 +20,7 @@ function NavHeader() {
 				<a className='nav_links' onClick={handleHomeClick} >Home</a>
 				<a className='nav_links' href="#landing_about">About</a>
 				<a className='nav_links' href="#landing_services">Services</a>
-				<a className='nav_links' href="#landing_contact">Contact</a>
+				<a className='nav_links' href="#contact">Contact</a>
           </Nav>
 			<div className="nav_btn_container">
 				<button className='nav_btn custom_btn' onClick={() =>  navigate('/auth')}>Log In</button>

@@ -25,7 +25,7 @@ function LandingServices() {
 
     return(
         <section id="landing_services">
-            <div className="landing_services_container">
+            <div className="landing_services_container" data-aos="fade-up" data-aos-duration="2000" data-aos-once>
                 <h1>services</h1>
                 <article className="note_container">
                     <h5>Note:</h5>
