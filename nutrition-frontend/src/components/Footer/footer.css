@@ -1,0 +1,116 @@
+#contact {
+    background: var(--color-light);
+}
+
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 3rem;
+}
+
+.footer_logo {
+    width: 30%;
+}
+
+.footer__sections {
+    border-top: 2px solid var(--color-blue);
+    border-bottom: 2px solid var(--color-blue);
+    padding: 3rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3.5rem;
+    margin: 0.5rem 0 3rem;
+}
+
+.footer__sections a {
+    color: var(--color-blue);
+    font-weight: bold;
+    font-family: var(--font-alternative);
+    position: relative;
+}
+
+.footer__sections a::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -1.5px;
+    left: 0;
+    background-color: var(--color-blue);
+    transition: var(--transition);
+}
+
+.footer__sections a:hover::before {
+    width: 100%;
+}
+
+.footer__copyright {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    align-items: center;
+}
+
+.copyright__socials {
+    justify-self: center;
+    display: flex;
+    font-size: 1.7rem;
+    gap: 1.2rem;
+}
+
+.copyright__socials a {
+    color: var(--color-blue);
+    transition: var(--transition);
+}
+
+.copyright__socials a:hover {
+    color: var(--color-green);
+}
+
+.footer__src {
+    justify-self: end;
+    transition: var(--transition);
+}
+
+.footer__src:hover {
+    color: var(--color-green);
+}
+
+.footer__copyright p, .footer__src {
+    color: var(--color-blue);
+    font-weight: bold;
+    font-family: var(--font-primary);
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* MEDIA QUERIES FOR TABLETS (MEDIUM DEVICES) */
+@media screen and (max-width: 1024px){
+    .footer__sections, .footer__copyright {
+        width: 85%;
+    }
+}
+
+/* MEDIA QUERIES FOR MOBILE PHONES (SMALL DEVICES) */
+@media screen and (max-width: 600px){
+    .footer__sections {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer__copyright {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer__src {
+        justify-self: unset;
+    }
+}
