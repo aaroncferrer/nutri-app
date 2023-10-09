@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function GoogleSignIn() {
+function GoogleSignIn({setCurrentUser}) {
+	const navigate = useNavigate();
+	
     const googleClientId = import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID;
 
 	const signInCallback = async (result) => {
@@ -11,9 +14,10 @@ function GoogleSignIn() {
 				const response = await axios.post('http://localhost:3000/patient/google', params);
 				const data = response.data;
 				console.log(data);
-				alert(`Signup successful! Please check your email for instructions on how to reset your password.`)
-				// Set token in local storage
-				// Redirect to /dashboard
+				alert('Signed in successfully!');
+				setCurrentUser({data});
+				navigate('/');
+
 			} catch (error) {
 				console.error(error);
 			}

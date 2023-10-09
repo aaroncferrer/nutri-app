@@ -27,10 +27,13 @@ function App() {
 
 	return (
 		<Router>	
-			<NavHeader />
+			<NavHeader 
+				currentUser={currentUser}
+				setCurrentUser={setCurrentUser}
+			/>
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
-				<Route exact path="/auth" element={<Auth />} />
+				<Route exact path="/auth" element={<Auth setCurrentUser={setCurrentUser}/>} />
 				<Route exact path="/signup" element={<Signup />} />
 			</Routes>
 			<Footer />
