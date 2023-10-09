@@ -4,17 +4,19 @@ import { useEffect } from "react";
 function GoogleSignIn() {
     const googleClientId = import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID;
 
-    const signInCallback = (result) => {
+	const signInCallback = async (result) => {
 		if (result.credential) {
 			const params = { token: result.credential };
-			axios
-			.post('http://localhost:3000/patient/google', params)
-			.then((res) => {
-				console.log(res.data);
-				// set token in local storage
-				// redirect to /dashboard
-			})
-			.catch((err) => console.log(err));
+			try {
+				const response = await axios.post('http://localhost:3000/patient/google', params);
+				const data = response.data;
+				console.log(data);
+				alert(`Signup successful! Please check your email for instructions on how to reset your password.`)
+				// Set token in local storage
+				// Redirect to /dashboard
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	};
 

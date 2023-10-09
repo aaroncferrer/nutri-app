@@ -7,17 +7,16 @@ import { useNavigate } from 'react-router-dom';
 function NavHeader() {
   	const navigate = useNavigate();
 
-	const handleHomeClick = () => {
+	const navigateHome = () => {
     	navigate('/');
   	};
-
   return (
 	<Navbar expand="lg" className="nav">
-        <img className='nav_logo' onClick={handleHomeClick} src={logo}></img>
+        <img className='nav_logo' onClick={navigateHome} src={logo}></img>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto nav_actions">
-				<a className='nav_links' onClick={handleHomeClick} >Home</a>
+				<a className='nav_links' onClick={navigateHome} >Home</a>
 				<a className='nav_links' href="#landing_about">About</a>
 				<a className='nav_links' href="#landing_services">Services</a>
 				<a className='nav_links' href="#contact">Contact</a>
