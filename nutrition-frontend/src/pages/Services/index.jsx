@@ -36,6 +36,8 @@ function Services({currentUser}) {
                                     className={`${currentUser === null ? 'disabled' : 'custom_btn'} service_btn  `}
                                     href={service.scheduling_url}
                                     disabled={currentUser === null}
+                                    target="_blank" 
+                                    rel='noreferrer'
                                 >
                                     {currentUser === null ? "LOGIN TO SCHEDULE" : "SCHEDULE NOW"}
                                 </a>

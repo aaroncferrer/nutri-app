@@ -61,7 +61,7 @@
 }
 
 .service h3 {
-    font-family: var(--font-primary);
+    font-family: var(--font-alternative);
     font-size: 1.6rem;
 }
 
@@ -72,6 +72,7 @@
 }
 
 .service h6 {
+    font-family: var(--font-alternative);
     font-size: 1.2rem;
     font-weight: bold;
 }
@@ -79,6 +80,7 @@
 .service p {
     font-size: 0.85rem;
     margin-bottom: 3rem;
+    font-family: var(--font-primary);
 }
 
 .service button {
