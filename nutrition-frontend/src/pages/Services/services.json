@@ -1,0 +1,35 @@
+{
+    "services": [
+        {
+            "id": 1,
+            "name": "Nutri Tech Nutrition Consultation",
+            "scheduling_url": "https://calendly.com/arcferrer5/nutri-tech-nutrition-consultation",
+            "duration": 60,
+            "description_01": "In the Nutrition Consultation led by Anthony, patients embark on a comprehensive exploration of their dietary journey. During this hour-long session, Anthony will initiate a dialogue to understand the patient's relationship with food, covering topics such as daily eating habits, dietary preferences, and past experiences with fad diets.",
+            "description_02" : "In addition, Anthony delves into the patient's activity level, lifestyle, and overall health goals. This conversation is an opportunity for the patient to express their concerns, dietary challenges, and aspirations for a healthier life.The Nutrition Consultation process also incorporates ADIME (Assessment, Diagnosis, Intervention, Monitoring, and Evaluation), allowing Anthony to create a personalized nutrition plan tailored to the patient's unique needs and objectives. The patient's input is highly valued as Anthony collaborates with them to develop strategies and dietary recommendations.",
+            "description_03" : "Moreover, if the patient has concerns related to comorbidities or complex medical conditions, Anthony may recommend transitioning to Medical Nutrition Therapy (MNT) for a more specialized approach. Ultimately, the Nutrition Consultation sets the foundation for a holistic and individualized journey towards improved nutrition and well-being.",
+            "image": "/service01.png"
+        },
+        {
+            "id": 2,
+            "name": "Nutri Tech Follow-up Consultation",
+            "scheduling_url": "https://calendly.com/arcferrer5/nutri-tech-follow-up-consultation",
+            "duration": 60,
+            "note" : "The Nutri Tech Nutrition Consultation must have been booked and done prior scheduling a follow-up.",
+            "description_01": "The Follow-up Consultation, an hour-long session with Anthony, represents a pivotal phase in the patient's nutritional journey. Building on the foundation established in the initial Nutrition Consultation, this follow-up appointment focuses on progress, challenges, and continued support.",
+            "description_02": "Anthony assesses how the patient has been implementing the nutrition plan, addressing any hurdles encountered along the way. The patient's feedback is integral, allowing Anthony to fine-tune the nutrition strategy as needed, ensuring that it remains aligned with their evolving goals.",
+            "description_03": "During this consult, Anthony may explore adjustments to the dietary plan, incorporate new insights, or introduce additional resources to enhance the patient's journey. It's a collaborative effort where Anthony and the patient work together to maintain momentum and make sustainable changes. This consult ensures that the patient stays on the path towards their health and wellness aspirations. It's important to note that the Follow-up Consultation is available to patients who have previously undergone a Nutrition Consultation. If the patient's concerns primarily revolve around weight management, eating habits, food choices, or similar factors, the initial Nutrition Consultation may be more appropriate.",
+            "image": "/service02.png"
+        },
+        {
+            "id": 3,
+            "name": "Nutri Tech Medical Nutrition Therapy",
+            "scheduling_url": "https://calendly.com/arcferrer5/nutri-tech-medical-nutrition-therapy",
+            "duration": 90,
+            "description_01": "Anthony's Medical Nutrition Therapy (MNT) sessions are designed for individuals facing complex medical conditions, such as diabetes, heart disease, or digestive disorders. Lasting 1 hour and 30 minutes, this specialized service places a strong emphasis on a holistic and evidence-based approach to nutrition.Anthony works closely with the patient to develop a comprehensive dietary plan that complements their medical treatment. The session begins with a thorough assessment of the patient's medical history, current medications, and specific health concerns.",
+            "description_02":"The MNT journey is highly tailored to the patient's unique medical condition, addressing dietary aspects that can assist in managing and improving their health. Anthony may discuss strategies to regulate blood sugar levels, reduce cholesterol, or alleviate gastrointestinal symptoms, depending on the patient's needs.",
+            "description_03": "The patient's active involvement is encouraged as they collaborate with Anthony to create a practical and effective nutrition plan. However, if the patient's primary concerns are related to weight management, eating habits, or general nutrition advice, the Nutrition Consultation may be more suitable. The Medical Nutrition Therapy sessions are dedicated to individuals seeking specialized nutrition guidance to complement their medical treatment and enhance their overall well-being.",
+            "image": "/service03.png"
+        }
+    ]
+}

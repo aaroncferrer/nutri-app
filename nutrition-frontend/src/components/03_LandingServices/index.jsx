@@ -1,8 +1,11 @@
 import './landingServices.css'
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function LandingServices() {
+    const navigate = useNavigate();
+
     const [eventTypes, setEventTypes] = useState([]);
 
 	useEffect(() => {
@@ -41,7 +44,7 @@ function LandingServices() {
                             <div className="separating_line"></div>
 
                             <p>{removeHTMLTags(event.description_html)}</p>
-                            <button className='custom_btn'>LEARN MORE</button>
+                            <button className='custom_btn' onClick={() =>  navigate('/services')}>LEARN MORE</button>
                         </div>
                     ))}    
                 </article>

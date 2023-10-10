@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Junge&family=Kite+One&family=Montserrat:wght@200;300;400;500;600&family=Noto+Sans:wght@100;200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600&family=Junge&family=Kite+One&family=Montserrat:wght@200;300;400;500;600&family=Noto+Sans:wght@100;200;300&display=swap');
 
 * {
 	margin: 0;
@@ -17,7 +17,7 @@
 
 	--transition: all 0.3s ease;
 
-	--font-primary: 'Montserrat', sans-serif;
+	--font-primary: 'Gabarito', cursive;
 	--font-secondary: 'Noto Sans', sans-serif;
 	--font-tertiary: 'Junge', serif;
 	--font-alternative: 'Kite One', sans-serif;
