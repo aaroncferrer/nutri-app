@@ -2,10 +2,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './nav.css'
 import logo from '../../assets/logo_blue-plain.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function NavHeader({currentUser, setCurrentUser}) {
   	const navigate = useNavigate();
+	const location = useLocation();
 
 	const navigateHome = () => {
     	navigate('/');
@@ -24,8 +25,13 @@ function NavHeader({currentUser, setCurrentUser}) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto nav_actions">
 				<a className='nav_links' onClick={navigateHome} >Home</a>
-				<a className='nav_links' href="#landing_about">About</a>
-				<a className='nav_links' href="#landing_services">Services</a>
+				{location.pathname === '/' &&(
+				<>
+					<a className='nav_links' href="#landing_about">About</a>
+					<a className='nav_links' href="#landing_services">Services</a>
+				</>
+					
+				)}
 				<a className='nav_links' href="#contact">Contact</a>
 				{currentUser ? (
 					<Link to='/auth' className='nav_links'>Appointments</Link>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'get_user_event_types', to: 'calendly#user_event_types'
   
   resources :appointments, only: [:index, :create]
+  post '/appointments/create_manually', to: 'appointments#create_manually'
 
   resources :patients, only: [:update]
 end
