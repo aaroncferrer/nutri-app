@@ -1,6 +1,15 @@
 require 'jwt_auth'
 
 class PatientsController < ApplicationController
+	def show
+		patient_with_appointments = {
+			patient: @current_user,
+			appointments: @current_user.appointments
+		}
+		
+		render json: patient_with_appointments
+	end
+
 	def update
 		patient = Patient.find(params[:id])
 		if patient.update(patient_params)

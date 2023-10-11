@@ -13,6 +13,7 @@ import Auth from "./pages/Auth";
 import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import Services from "./pages/Services";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser')) || null)
@@ -37,6 +38,7 @@ function App() {
 				<Route exact path="/auth" element={<Auth setCurrentUser={setCurrentUser}/>} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/services" element={<Services currentUser={currentUser} />} />
+				<Route exact path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
 			</Routes>
 			<Footer />
 		</Router>
