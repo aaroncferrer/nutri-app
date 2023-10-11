@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :appointments, only: [:index, :create]
   post '/appointments/create_manually', to: 'appointments#create_manually'
 
-  resources :patients, only: [:update]
+  resources :patients, only: [:show, :update]
 end

@@ -34,7 +34,7 @@ function NavHeader({currentUser, setCurrentUser}) {
 				)}
 				<a className='nav_links' href="#contact">Contact</a>
 				{currentUser ? (
-					<Link to='/auth' className='nav_links'>Appointments</Link>
+					<Link to='/dashboard' className='nav_links'>Dashboard</Link>
 				):(
 					null
 				)}
