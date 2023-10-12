@@ -1,37 +1,84 @@
 import './dashboard.css';
-import defaultImg from '../../assets/default-dp.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import RecordModal from '../../components/RecordModal';
+import ProfileDash from '../../components/ProfileDash';
 
 function Dashboard({currentUser}) {
 
-    const [userDetails, setUserDetails] = useState(null)
-    const [appointments, setAppointments] = useState([])
-    const [selectedFilter, setSelectedFilter] = useState('all')
+    const userRole = currentUser.data.user.role;
+    const userId = currentUser.data.user.id;
     const token = currentUser.data.token;
+    const [appointments, setAppointments] = useState([]);
+    const [selectedFilter, setSelectedFilter] = useState('all');
+    const [showModal, setShowModal] = useState(false);
+    const [recordData, setRecordData] = useState(null);
+    const [showCreateRecordForm, setShowCreateRecordForm] = useState(false);
+    const [recordForm, setRecordForm] = useState({
+        assessments: '',
+        recommendations: '',
+        notes: '',
+    });
+    const [loading, setLoading] = useState(false);
+    const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
+    const [searchInput, setSearchInput] = useState('');
 
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            try{
-                const response = await axios.get(`http://localhost:3000/patients/${currentUser.data.patient.id}`, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                const data = response.data;
-                setUserDetails(data);
-                console.log(data);
-            }catch(error){
-                console.error(error);
-            }
+    const handleCheckRecord = async (appointmentId) => {
+        setLoading(true);
+        setSelectedAppointmentId(appointmentId);
+        try{
+            const response = await axios.get(`http://localhost:3000/appointments/${appointmentId}/records`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            });
+            const data = response.data;
+            setRecordData(data);
+            setShowModal(true);
+        }catch(error){
+            console.error(error);
+        }finally{
+            setLoading(false);
         }
-        fetchUserDetails();
-    }, [currentUser.data.patient.id, token])
+    }
 
-    const upcomingAppointments = userDetails?.appointments.filter(
-        (appointment) => new Date(appointment.start_time) > new Date()
-    );
+    const handleCreateRecord = () => {
+        setShowCreateRecordForm(true);
+    };
+
+    const handleCloseRecordForm = () => {
+        setShowCreateRecordForm(false);
+        setShowModal(false);
+    };
+
+    const handleSubmitRecord = async () => {
+        setLoading(true);
+        
+        try{
+            const response = await axios.post(`http://localhost:3000/appointments/${selectedAppointmentId}/records`,
+            {
+                record: recordForm
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const data = response.data;
+            setRecordData(data);
+            setShowCreateRecordForm(false);
+            setRecordForm({
+                assessments: '',
+                recommendations: '',
+                notes: '',
+            });
+        }catch(error){
+            console.error(error);
+        }finally{
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         const fetchAppointments = async () => {
@@ -52,21 +99,34 @@ function Dashboard({currentUser}) {
         fetchAppointments();
     }, [token])
 
+    const handleSearchInputChange = (e) => {
+        setSearchInput(e.target.value);
+    };
+
     const handleFilterChange = (e) => {
         setSelectedFilter(e.target.value);
     }
 
     const filterAppointments = (filter) => {
         const now = new Date();
-        switch(filter){
-            case 'upcoming':
-                return appointments.filter((appointment) => new Date(appointment.start_time) > now);
-            case 'past':
-                return appointments.filter((appointment) => new Date(appointment.end_time) < now);
-            default:
-                return appointments;
-        }
-    }
+        return appointments.filter((appointment) => {
+            const startTime = new Date(appointment.start_time);
+            const endTime = new Date(appointment.end_time);
+            const searchParts = searchInput.toLowerCase().split(' ');
+
+        return (
+            (filter === 'all' || (filter === 'upcoming' && startTime > now) || (filter === 'past' && endTime < now)) &&
+            (searchInput.trim() === '' || 
+                searchParts.every((part) =>
+                    appointment.patient.given_name.toLowerCase().includes(part) ||
+                    appointment.patient.family_name.toLowerCase().includes(part) ||
+                    appointment.dietitian.given_name.toLowerCase().includes(part) ||
+                    appointment.dietitian.family_name.toLowerCase().includes(part)
+                )
+            )
+        );
+        });
+    };
     
     const sortedAppointments = filterAppointments(selectedFilter).sort(
         (a, b) => new Date(a.start_time) - new Date(b.start_time)
@@ -74,19 +134,30 @@ function Dashboard({currentUser}) {
 
     return(
         <main className='dashboard'>
+
+            <RecordModal 
+                loading={loading}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                recordData={recordData}
+                recordForm={recordForm}
+                setRecordForm={setRecordForm}
+                handleSubmitRecord={handleSubmitRecord}
+                handleCloseRecordForm={handleCloseRecordForm}
+                userRole={userRole}
+                handleCreateRecord={handleCreateRecord}
+                showCreateRecordForm={showCreateRecordForm}
+            />
+
             <section className="dashboard_header">
                 <h1>account dashboard</h1>
             </section>    
 
-            <section className="profile_dash">
-                <img src={defaultImg}></img>
-                <div className="profile_info">
-                    <h5>{`${userDetails?.patient.given_name} ${userDetails?.patient.family_name}`}</h5>
-                    <h5>{userDetails?.patient.email}</h5>
-                </div>
-                <h5>Upcoming appointments: {upcomingAppointments?.length}</h5>
-                <button className='custom_btn'>Edit Profile</button>
-            </section>
+            <ProfileDash 
+                userRole={userRole}
+                userId={userId}
+                token={token}
+            />
 
             <section className="appointments_section">
                 <div className="divider"></div>
@@ -103,13 +174,26 @@ function Dashboard({currentUser}) {
                                 <option value="upcoming">Upcoming</option>
                                 <option value="past">Past</option>
                             </select>
+                            <input
+                                type="text"
+                                placeholder="Search by name"
+                                value={searchInput}
+                                onChange={handleSearchInputChange}
+                            />
                          </div>
 
                     {sortedAppointments.map((appointment => (
                         <div className="appointment" key={appointment.id}>
                             <div className="appointment_details">
                                 <h6>{appointment.service}</h6>
-                                <h6>Dietitian: {appointment.dietitian.given_name} {appointment.dietitian.family_name}</h6>
+                                <h6>
+                                    {
+                                        userRole === "dietitian"
+                                        ? `Patient: ${appointment.patient.given_name} ${appointment.patient.family_name}`
+                                        : `Dietitian: ${appointment.dietitian.given_name} ${appointment.dietitian.family_name}`
+                                    }
+
+                                </h6>
                             </div>
                             <div className="appointment_details">
                                 <h6><span className='hidden'>Starts:</span> {new Date(appointment.start_time).toLocaleString()}</h6>
@@ -117,9 +201,13 @@ function Dashboard({currentUser}) {
                             </div>
                             <div className="appointment_details">
                                 <h6><span className='hidden'>Duration:</span> {appointment.duration} minutes</h6>
-                                <h6><a href={appointment.meet_link} target="_blank" rel='noreferrer'>Meeting Link</a></h6>
+                                <h6>
+                                    {new Date(appointment.end_time) < new Date()
+                                    ? "Done"
+                                    : <a href={appointment.meet_link} target="_blank" rel='noreferrer'>Meeting Link</a>}
+                                </h6>
                             </div>
-                            <button className='custom_btn'>Check Record</button>
+                            <button className='custom_btn' onClick={() => handleCheckRecord(appointment.id)}>Check Record</button>
                         </div>
                     )))}
                 </div>

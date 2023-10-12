@@ -1,3 +1,5 @@
+require 'jwt_auth'
+
 class AppointmentsController < ApplicationController
   skip_before_action :check_auth, only: :create
 
