@@ -1,3 +1,5 @@
+require 'jwt_auth'
+
 class DietitiansController < ApplicationController
   def show
     dietitian_with_appointments = {
