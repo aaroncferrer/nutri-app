@@ -3,7 +3,7 @@ require 'jwt_auth'
 class PatientsController < ApplicationController
 	def show
 		patient_with_appointments = {
-			patient: @current_user,
+			user: @current_user,
 			appointments: @current_user.appointments
 		}
 		

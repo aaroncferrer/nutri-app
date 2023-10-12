@@ -50,7 +50,7 @@
     margin: 2rem 0 1.5rem;
     text-align: center;
     font-size: 3rem;
-    font-family: var(--font-secondary);
+    letter-spacing: 2px;
     font-weight: bold;
 }
 
@@ -77,6 +77,11 @@
     color: var(--color-blue);
     background-color: var(--color-light);
 
+}
+
+.records_container .divider {
+    border-color: var(--color-blue);
+    margin-bottom: 1rem;
 }
 
 /* RESPONSIVENESS */

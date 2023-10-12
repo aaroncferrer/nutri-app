@@ -26,9 +26,9 @@ function Auth({setCurrentUser}) {
 
         try {
             const patientResponse = await axios.post('http://localhost:3000/patient/login', loginFormData);
-            const patientData = patientResponse.data;
-            setCurrentUser({patientData});
-            console.log(patientData);
+            const data = patientResponse.data;
+            setCurrentUser({data});
+            console.log(data);
             alert('Signed in successfully!');
             setLoginFormData({
                 email: '',
@@ -38,9 +38,9 @@ function Auth({setCurrentUser}) {
         } catch (patientError) {
             try {
                 const dietitianResponse = await axios.post('http://localhost:3000/dietitian/login', loginFormData);
-                const dietitianData = dietitianResponse.data;
-                setCurrentUser({dietitianData});
-                console.log(dietitianData);
+                const data = dietitianResponse.data;
+                setCurrentUser({data});
+                console.log(data);
                 alert('Signed in successfully!');
                 setLoginFormData({
                     email: '',

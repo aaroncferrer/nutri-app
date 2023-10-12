@@ -29,7 +29,7 @@ class DietitianAuthController < ApplicationController
       end
       
       token = JwtAuth.encode({ dietitian_id: dietitian.id })
-      render json: { token: token, dietitian: dietitian.as_json(only: [:id, :given_name, :family_name, :email, :role]), data: data }, status: :ok
+      render json: { token: token, user: dietitian.as_json(only: [:id, :given_name, :family_name, :email, :role]), data: data }, status: :ok
 
     rescue StandardError => e
       render json: { error: e.message }, status: :unprocessable_entity
@@ -49,7 +49,7 @@ class DietitianAuthController < ApplicationController
     dietitian = Dietitian.find_by(email: params[:email])
     if dietitian&.authenticate(params[:password])
       token = JwtAuth.encode({ dietitian_id: dietitian.id })
-      render json: { token: token, dietitian: dietitian.as_json(only: [:id, :given_name, :family_name, :email, :role]) }, status: :ok
+      render json: { token: token, user: dietitian.as_json(only: [:id, :given_name, :family_name, :email, :role]) }, status: :ok
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
