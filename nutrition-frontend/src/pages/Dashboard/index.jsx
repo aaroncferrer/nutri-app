@@ -1,18 +1,16 @@
 import './dashboard.css';
-import defaultImg from '../../assets/default-dp.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Modal from 'react-bootstrap/Modal';
+import RecordModal from '../../components/RecordModal';
+import ProfileDash from '../../components/ProfileDash';
 
 function Dashboard({currentUser}) {
 
     const userRole = currentUser.data.user.role;
     const userId = currentUser.data.user.id;
-    const [userDetails, setUserDetails] = useState(null);
+    const token = currentUser.data.token;
     const [appointments, setAppointments] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState('all');
-    const token = currentUser.data.token;
-
     const [showModal, setShowModal] = useState(false);
     const [recordData, setRecordData] = useState(null);
     const [showCreateRecordForm, setShowCreateRecordForm] = useState(false);
@@ -24,10 +22,6 @@ function Dashboard({currentUser}) {
     const [loading, setLoading] = useState(false);
     const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
     const [searchInput, setSearchInput] = useState('');
-
-    const handleSearchInputChange = (e) => {
-        setSearchInput(e.target.value);
-    };
 
     const handleCheckRecord = async (appointmentId) => {
         setLoading(true);
@@ -48,74 +42,6 @@ function Dashboard({currentUser}) {
             setLoading(false);
         }
     }
-
-    const renderRecordContent = () => {
-        if (loading) {
-            return <p>Loading...</p>;
-        } else if (recordData) {
-            return(
-                <div className="records_container">
-                <h5>Assessments</h5>
-                <p>{recordData.assessments}</p>
-                <div className="divider"></div>
-                <h5>Recommendations</h5>
-                <p>{recordData.recommendations}</p>
-                <div className="divider"></div>
-                <span>Notes: {recordData.notes}</span>
-                </div>
-            );
-        }else if (showCreateRecordForm) {
-            return(
-                <div className="create-record-form">
-                    <h5>Assessments</h5>
-                    <input
-                        type="text"
-                        value={recordForm.assessments}
-                        onChange={(e) =>
-                        setRecordForm({ ...recordForm, assessments: e.target.value })
-                        }
-                    />
-                    <h5>Recommendations</h5>
-                    <input
-                        type="text"
-                        value={recordForm.recommendations}
-                        onChange={(e) =>
-                        setRecordForm({ ...recordForm, recommendations: e.target.value })
-                        }
-                    />
-                    <h5>Notes</h5>
-                    <input
-                        type="text"
-                        value={recordForm.notes}
-                        onChange={(e) =>
-                        setRecordForm({ ...recordForm, notes: e.target.value })
-                        }
-                    />
-                    <button className="custom_btn" onClick={handleSubmitRecord}>
-                    Submit
-                    </button>
-                    <button className="custom_btn" onClick={handleCloseRecordForm}>
-                    Close
-                    </button>
-                </div>
-            );
-        }else {
-        // No record yet, show "Create Record" button
-            if(userRole === "dietitian"){
-                return(
-                    <div>
-                        <p>No Record yet</p>
-                        <button className="custom_btn" onClick={handleCreateRecord}>
-                            Create Record
-                        </button>
-                    </div>
-                );
-            }else {
-                return <p>No Record yet</p>
-            }
-
-        }
-    };
 
     const handleCreateRecord = () => {
         setShowCreateRecordForm(true);
@@ -142,35 +68,17 @@ function Dashboard({currentUser}) {
             const data = response.data;
             setRecordData(data);
             setShowCreateRecordForm(false);
+            setRecordForm({
+                assessments: '',
+                recommendations: '',
+                notes: '',
+            });
         }catch(error){
             console.error(error);
         }finally{
             setLoading(false);
         }
     }
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            try{
-                const response = await axios.get(`http://localhost:3000/${userRole}s/${userId}`, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                const data = response.data;
-                setUserDetails(data);
-                console.log(data);
-            }catch(error){
-                console.error(error);
-            }
-        }
-        fetchUserDetails();
-    }, [userId, userRole, token])
-
-    const upcomingAppointments = userDetails?.appointments.filter(
-        (appointment) => new Date(appointment.start_time) > new Date()
-    );
 
     useEffect(() => {
         const fetchAppointments = async () => {
@@ -190,6 +98,10 @@ function Dashboard({currentUser}) {
         }
         fetchAppointments();
     }, [token])
+
+    const handleSearchInputChange = (e) => {
+        setSearchInput(e.target.value);
+    };
 
     const handleFilterChange = (e) => {
         setSelectedFilter(e.target.value);
@@ -222,34 +134,30 @@ function Dashboard({currentUser}) {
 
     return(
         <main className='dashboard'>
-            
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Record</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{renderRecordContent()}</Modal.Body>
-                {recordData && (
-                <Modal.Footer>
-                    <button className="custom_btn" onClick={() => setShowModal(false)}>
-                    Close
-                    </button>
-                </Modal.Footer>
-                )}
-        </Modal>
+
+            <RecordModal 
+                loading={loading}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                recordData={recordData}
+                recordForm={recordForm}
+                setRecordForm={setRecordForm}
+                handleSubmitRecord={handleSubmitRecord}
+                handleCloseRecordForm={handleCloseRecordForm}
+                userRole={userRole}
+                handleCreateRecord={handleCreateRecord}
+                showCreateRecordForm={showCreateRecordForm}
+            />
 
             <section className="dashboard_header">
                 <h1>account dashboard</h1>
             </section>    
 
-            <section className="profile_dash">
-                <img src={defaultImg}></img>
-                <div className="profile_info">
-                    <h5>{`${userDetails?.user.given_name} ${userDetails?.user.family_name}`}</h5>
-                    <h5>{userDetails?.user.email}</h5>
-                </div>
-                <h5>Upcoming appointments: {upcomingAppointments?.length}</h5>
-                <button className='custom_btn'>Edit Profile</button>
-            </section>
+            <ProfileDash 
+                userRole={userRole}
+                userId={userId}
+                token={token}
+            />
 
             <section className="appointments_section">
                 <div className="divider"></div>
