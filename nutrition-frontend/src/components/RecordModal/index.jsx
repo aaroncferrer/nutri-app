@@ -23,19 +23,19 @@ function RecordModal(props) {
             );
         }else if (showCreateRecordForm) {
             return(
-                <div className="record_form">
+                <form className="record_form" onSubmit={handleSubmitRecord}>
                     <div className="record_input_container">
                         <h5>Assessments</h5>
-                        <input
-                            type="text"
+                        <textarea
+                            rows={3}
                             value={recordForm.assessments}
                             onChange={(e) =>
                             setRecordForm({ ...recordForm, assessments: e.target.value })
                             }
                         />
                         <h5>Recommendations</h5>
-                        <input
-                            type="text"
+                        <textarea
+                            rows={3}
                             value={recordForm.recommendations}
                             onChange={(e) =>
                             setRecordForm({ ...recordForm, recommendations: e.target.value })
@@ -58,7 +58,7 @@ function RecordModal(props) {
                         Close
                         </button>
                     </div>        
-                </div>
+                </form>
             );
         }else {
         // No record yet, show "Create Record" button
