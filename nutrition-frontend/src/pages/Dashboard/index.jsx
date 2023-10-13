@@ -31,7 +31,7 @@ function Dashboard(props) {
         setLoading(true);
         setSelectedAppointmentId(appointmentId);
         try{
-            const response = await axios.get(`http://localhost:3000/appointments/${appointmentId}/records`,
+            const response = await axios.get(`https://nutri-avion.onrender.com/appointments/${appointmentId}/records`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -60,7 +60,7 @@ function Dashboard(props) {
         setLoading(true);
         
         try{
-            const response = await axios.post(`http://localhost:3000/appointments/${selectedAppointmentId}/records`,
+            const response = await axios.post(`https://nutri-avion.onrender.com/appointments/${selectedAppointmentId}/records`,
             {
                 record: recordForm
             },
@@ -88,7 +88,7 @@ function Dashboard(props) {
         setLoading(true);
         const fetchAppointments = async () => {
             try{
-                const response = await axios.get('http://localhost:3000/appointments', 
+                const response = await axios.get('https://nutri-avion.onrender.com/appointments', 
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

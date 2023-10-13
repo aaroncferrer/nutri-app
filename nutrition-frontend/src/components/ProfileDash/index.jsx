@@ -30,7 +30,7 @@ function ProfileDash(props) {
         setLoading(true);
 
         try {
-            const response = await axios.patch(`http://localhost:3000/patients/${userId}`,   
+            const response = await axios.patch(`https://nutri-avion.onrender.com/patients/${userId}`,   
                 {
                     patient: formData,
                 },
@@ -62,7 +62,7 @@ function ProfileDash(props) {
         setLoading(true);
         const fetchUserDetails = async () => {
             try{
-                const response = await axios.get(`http://localhost:3000/${userRole}s/${userId}`, 
+                const response = await axios.get(`https://nutri-avion.onrender.com/${userRole}s/${userId}`, 
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -118,9 +118,9 @@ function ProfileDash(props) {
                             />
                         </div>
                         <div className="form-group">
-                            <button type="submit" className="custom_btn">
-                                Save Changes
-                            </button>
+                        <button type="submit" className="custom_btn">
+                            Save Changes
+                        </button>
                         </div>
                     </form>
                 </Modal.Body>

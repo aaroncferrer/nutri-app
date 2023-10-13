@@ -15,16 +15,27 @@ function GoogleSignIn(props) {
 		if (result.credential) {
 			const params = { token: result.credential };
 			try {
-				const response = await axios.post('http://localhost:3000/patient/google', params);
-				const data = response.data;
+				const patientResponse = await axios.post('https://nutri-avion.onrender.com/patient/google', params);
+				const data = patientResponse.data;
 				console.log(data);
 				setLoading(false);
-				alert('Signed in successfully!');
+				alert('Signed in successfully as a patient!');
 				setCurrentUser({data});
 				navigate('/');
-
-			}catch (error) {
-				console.error(error);
+			}catch (patientError) {
+				console.error('Patient sign-in failed:', patientError);
+				try{
+				// Attempt to sign in as a dietitian
+					const dietitianResponse = await axios.post('https://nutri-avion.onrender.com/dietitian/google', params);
+					const data = dietitianResponse.data;
+					console.log(data);
+					setLoading(false);
+					alert('Signed in successfully as a dietitian!');
+					setCurrentUser({data});
+					navigate('/');
+				}catch (dietitianError) {
+					console.error('Dietitian sign-in failed:', dietitianError);
+				}
 			}finally {
 				setLoading(false);
 			}

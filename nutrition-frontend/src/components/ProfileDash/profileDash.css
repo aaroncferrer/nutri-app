@@ -21,6 +21,23 @@
     font-family: var(--font-alternative);
 }
 
+/* MODAL */
+.edit_form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.edit_form button {
+    margin-top: 1rem;
+}
+
 @media screen and (max-width: 1024px){
     .profile_dash {
         width: 87.5%;
