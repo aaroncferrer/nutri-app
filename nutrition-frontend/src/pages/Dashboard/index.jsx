@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import RecordModal from '../../components/RecordModal';
 import ProfileDash from '../../components/ProfileDash';
+import Spinner from '../../components/Spinner';
 
-function Dashboard({currentUser}) {
+function Dashboard(props) {
+
+    const { currentUser, loading, setLoading } = props;
 
     const userRole = currentUser.data.user.role;
     const userId = currentUser.data.user.id;
@@ -19,7 +22,6 @@ function Dashboard({currentUser}) {
         recommendations: '',
         notes: '',
     });
-    const [loading, setLoading] = useState(false);
     const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
     const [searchInput, setSearchInput] = useState('');
 
@@ -81,6 +83,7 @@ function Dashboard({currentUser}) {
     }
 
     useEffect(() => {
+        setLoading(true);
         const fetchAppointments = async () => {
             try{
                 const response = await axios.get('http://localhost:3000/appointments', 
@@ -91,6 +94,7 @@ function Dashboard({currentUser}) {
                 })
                 const data = response.data;
                 setAppointments(data);
+                setLoading(false);
                 console.log(data);
             }catch(error){
                 console.error(error);
@@ -135,6 +139,10 @@ function Dashboard({currentUser}) {
     return(
         <main className='dashboard'>
 
+            {loading && (
+                <Spinner />
+            )}
+
             <RecordModal 
                 loading={loading}
                 showModal={showModal}
@@ -154,9 +162,12 @@ function Dashboard({currentUser}) {
             </section>    
 
             <ProfileDash 
+                currentUser={currentUser}
                 userRole={userRole}
                 userId={userId}
                 token={token}
+                loading={loading}
+                setLoading={setLoading}
             />
 
             <section className="appointments_section">

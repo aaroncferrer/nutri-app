@@ -1,3 +1,4 @@
+import Spinner from '../Spinner';
 import './recordModal.css';
 import Modal from 'react-bootstrap/Modal';
 
@@ -7,7 +8,7 @@ function RecordModal(props) {
 
     const renderRecordContent = () => {
         if (loading) {
-            return <p>Loading...</p>;
+            return <Spinner />;
         } else if (recordData) {
             return(
                 <div className="records_container">
