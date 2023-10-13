@@ -4,10 +4,12 @@ import axios from 'axios';
 import RecordModal from '../../components/RecordModal';
 import ProfileDash from '../../components/ProfileDash';
 import Spinner from '../../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard(props) {
 
     const { currentUser, loading, setLoading } = props;
+    const navigate = useNavigate();
 
     const userRole = currentUser.data.user.role;
     const userId = currentUser.data.user.id;
@@ -101,7 +103,7 @@ function Dashboard(props) {
             }
         }
         fetchAppointments();
-    }, [token])
+    }, [token, setLoading])
 
     const handleSearchInputChange = (e) => {
         setSearchInput(e.target.value);
@@ -173,7 +175,10 @@ function Dashboard(props) {
             <section className="appointments_section">
                 <div className="divider"></div>
                 <h1>APPOINTMENTS</h1>
+                    {}
                     <div className="appointments_container">
+                        <button className='book_btn' onClick={() => navigate('/services')}>BOOK APPOINTMENT</button>
+
                         <div className="filter_container">
                             <label htmlFor="filterAppointments">Filter Appointments:</label>
                             <select

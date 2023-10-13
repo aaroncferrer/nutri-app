@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../Spinner";
 
 function GoogleSignIn(props) {
 
-	const { setCurrentUser, loading, setLoading } = props;
+	const { setCurrentUser, setLoading } = props;
 
 	const navigate = useNavigate();
 	
@@ -50,12 +49,7 @@ function GoogleSignIn(props) {
   	}, [googleClientId]);
 
     return(
-		<>
-			{loading && (
-				<Spinner />
-			)}
-        	<div id="signInDiv" />
-		</>
+        <div id="signInDiv" />
     )
 }
 
