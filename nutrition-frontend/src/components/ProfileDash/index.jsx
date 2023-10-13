@@ -39,7 +39,7 @@ function ProfileDash(props) {
                 <h5>{`${userDetails?.user.given_name} ${userDetails?.user.family_name}`}</h5>
                 <h5>{userDetails?.user.email}</h5>
             </div>
-            <h5>Upcoming appointments: {upcomingAppointments?.length}</h5>
+            <h5>Upcoming appointments: {upcomingAppointments.filter(appointment => appointment.status !== "canceled").length}</h5>
             <button className='custom_btn'>Edit Profile</button>
         </section>
     )

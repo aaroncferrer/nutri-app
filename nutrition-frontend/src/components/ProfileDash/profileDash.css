@@ -20,3 +20,34 @@
     font-size: 1.4rem;
     font-family: var(--font-alternative);
 }
+
+@media screen and (max-width: 1024px){
+    .profile_dash {
+        width: 87.5%;
+    }
+
+    .profile_dash img{
+        width: 5rem;
+        border-radius: 50%;
+        border: 3px solid var(--color-blue);
+    }
+
+    .profile_dash h5 {
+        font-size: 0.9rem;
+        font-family: var(--font-alternative);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .profile_dash {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    .profile_dash h5 {
+        font-size: 0.75rem;
+    }
+    .profile_dash button{
+        font-size: 0.75rem;
+    }
+}

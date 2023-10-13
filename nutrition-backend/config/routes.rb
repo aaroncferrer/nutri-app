@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Appointments
   resources :appointments, only: [:index, :create]
-  post '/appointments/create_manually', to: 'appointments#create_manually'
+  patch '/appointments/create_manually', to: 'appointments#create_manually'
 
   # Patients
   resources :patients, only: [:show, :update]

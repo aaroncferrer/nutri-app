@@ -163,7 +163,7 @@ function Dashboard({currentUser}) {
                 <div className="divider"></div>
                 <h1>APPOINTMENTS</h1>
                     <div className="appointments_container">
-                        <div className="filter_dropdown">
+                        <div className="filter_container">
                             <label htmlFor="filterAppointments">Filter Appointments:</label>
                             <select
                             id="filterAppointments"
@@ -183,7 +183,7 @@ function Dashboard({currentUser}) {
                          </div>
 
                     {sortedAppointments.map((appointment => (
-                        <div className="appointment" key={appointment.id}>
+                        <div className={`appointment ${appointment.status === "canceled" ? 'none' : ''}`} key={appointment.id}>
                             <div className="appointment_details">
                                 <h6>{appointment.service}</h6>
                                 <h6>
