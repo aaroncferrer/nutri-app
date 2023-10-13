@@ -93,7 +93,7 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:start_time, :end_time, :meet_link, :service, :duration)
+    params.require(:appointment).permit(:start_time, :end_time, :meet_link, :service, :duration, :status, :event_uri)
   end
 
 end
