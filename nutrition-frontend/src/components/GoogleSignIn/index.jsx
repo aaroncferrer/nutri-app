@@ -1,25 +1,33 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../Spinner";
 
-function GoogleSignIn({setCurrentUser}) {
+function GoogleSignIn(props) {
+
+	const { setCurrentUser, loading, setLoading } = props;
+
 	const navigate = useNavigate();
 	
     const googleClientId = import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID;
 
 	const signInCallback = async (result) => {
+		setLoading(true);
 		if (result.credential) {
 			const params = { token: result.credential };
 			try {
 				const response = await axios.post('http://localhost:3000/patient/google', params);
 				const data = response.data;
 				console.log(data);
+				setLoading(false);
 				alert('Signed in successfully!');
 				setCurrentUser({data});
 				navigate('/');
 
-			} catch (error) {
+			}catch (error) {
 				console.error(error);
+			}finally {
+				setLoading(false);
 			}
 		}
 	};
@@ -42,7 +50,12 @@ function GoogleSignIn({setCurrentUser}) {
   	}, [googleClientId]);
 
     return(
-        <div id="signInDiv" />
+		<>
+			{loading && (
+				<Spinner />
+			)}
+        	<div id="signInDiv" />
+		</>
     )
 }
 

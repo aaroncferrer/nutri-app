@@ -3,8 +3,11 @@ import GoogleSignIn from '../../components/GoogleSignIn/'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import Spinner from '../../components/Spinner';
 
-function Auth({setCurrentUser}) {
+function Auth(props) {
+
+    const { setCurrentUser, loading, setLoading } = props;
 
     const navigate = useNavigate();
 
@@ -23,19 +26,21 @@ function Auth({setCurrentUser}) {
 
    const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const patientResponse = await axios.post('http://localhost:3000/patient/login', loginFormData);
             const data = patientResponse.data;
             setCurrentUser({data});
             console.log(data);
+            setLoading(false);
             alert('Signed in successfully!');
             setLoginFormData({
                 email: '',
                 password: ''
             });
             navigate('/');
-        } catch (patientError) {
+        }catch (patientError) {
             try {
                 const dietitianResponse = await axios.post('http://localhost:3000/dietitian/login', loginFormData);
                 const data = dietitianResponse.data;
@@ -50,15 +55,26 @@ function Auth({setCurrentUser}) {
             } catch (dietitianError) {
                 alert(dietitianError.response?.data?.error || "Login failed");
             }
+        }finally{
+            setLoading(false);
         }
     }
 
     return(
         <main className="auth">
+
+            {loading && (
+                <Spinner />
+            )}
+
             <div className="auth_card">
                 <h3>Log in</h3>
                 <div className="google_container">
-                    <GoogleSignIn setCurrentUser={setCurrentUser}/>
+                    <GoogleSignIn 
+                        setCurrentUser={setCurrentUser}
+                        loading={loading}
+                        setLoading={setLoading}
+                    />
                 </div>
                 <span className='or_line'>or</span>
                 <h6>Log in using email address</h6>

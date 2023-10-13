@@ -4,8 +4,12 @@ import GoogleSignIn from '../../components/GoogleSignIn';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import Spinner from '../../components/Spinner';
 
-function Signup() {
+function Signup(props) {
+
+    const { setCurrentUser, loading, setLoading } = props;
+
     const navigate = useNavigate();
 
     const [signupFormData, setSignupFormData] = useState({
@@ -26,6 +30,7 @@ function Signup() {
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try{
             const response = await axios.post('http://localhost:3000/patient/signup', 
@@ -33,6 +38,7 @@ function Signup() {
                 patient: signupFormData
             })
             const data = response.data;
+            setLoading(false);
             alert(`Signup successful! Welcome to the community ${data.given_name}`)
             console.log(data);
             setSignupFormData({
@@ -43,13 +49,20 @@ function Signup() {
                 password_confirmation: ''
             })
             navigate('/auth')
-        }catch(error){
+        }catch(error) {
             alert(error.response.data.errors[0]);
+        }finally {
+            setLoading(false);
         }
     }
 
     return(
         <main className='signup'>
+
+            {loading && (
+                <Spinner />
+            )}
+
             <article className="signup_card">
                 <div className="signup_img_container">
                     <img className='signup_img' src={signupImg}></img>
@@ -58,7 +71,11 @@ function Signup() {
                     <h3>SIGN UP</h3>
                     <h6>Create your account to achieve your nutri goal!</h6>
                     <div className="google_container">
-                        <GoogleSignIn />
+                        <GoogleSignIn 
+                            setCurrentUser={setCurrentUser}
+                            loading={loading}
+                            setLoading={setLoading}
+                        />
                     </div>
                     <span className='or_line'>or</span>
                     <input
