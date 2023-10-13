@@ -26,4 +26,7 @@ Rails.application.routes.draw do
   resources :appointments do
     resources :records, only: [:index, :create]
   end
+
+  # Cron
+  get 'ping', to: 'cron#ping'
 end
