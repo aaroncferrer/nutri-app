@@ -11,7 +11,7 @@ function LandingServices() {
 	useEffect(() => {
 		const fetchEventTypes = async () => {
 		try {
-			const response = await axios.get('http://localhost:3000/get_user_event_types');
+			const response = await axios.get('https://nutri-avion.onrender.com/get_user_event_types');
 			setEventTypes(response.data.collection);
 			console.log(response.data.collection)
 		} catch (error) {

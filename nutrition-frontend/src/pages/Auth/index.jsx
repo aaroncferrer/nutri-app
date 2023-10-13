@@ -29,7 +29,7 @@ function Auth(props) {
         setLoading(true);
 
         try {
-            const patientResponse = await axios.post('http://localhost:3000/patient/login', loginFormData);
+            const patientResponse = await axios.post('https://nutri-avion.onrender.com/patient/login', loginFormData);
             const data = patientResponse.data;
             setCurrentUser({data});
             console.log(data);
@@ -42,7 +42,7 @@ function Auth(props) {
             navigate('/');
         }catch (patientError) {
             try {
-                const dietitianResponse = await axios.post('http://localhost:3000/dietitian/login', loginFormData);
+                const dietitianResponse = await axios.post('https://nutri-avion.onrender.com/dietitian/login', loginFormData);
                 const data = dietitianResponse.data;
                 setCurrentUser({data});
                 console.log(data);

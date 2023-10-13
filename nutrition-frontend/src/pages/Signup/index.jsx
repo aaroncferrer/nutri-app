@@ -33,7 +33,7 @@ function Signup(props) {
         setLoading(true);
 
         try{
-            const response = await axios.post('http://localhost:3000/patient/signup', 
+            const response = await axios.post('https://nutri-avion.onrender.com/patient/signup', 
             {
                 patient: signupFormData
             })
