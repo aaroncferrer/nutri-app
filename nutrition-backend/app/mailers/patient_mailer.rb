@@ -12,9 +12,9 @@ class PatientMailer < ApplicationMailer
     mail(to: @patient.email, cc: 'arcferrer5@gmail.com', subject: 'Welcome to Our App - Signup Confirmation')
   end
 
-  def diet_google_signup(dietitian, temporary_password)
-    @temporary_password = temporary_password
-    @dietitian = dietitian
-    mail(to: @dietitian.email, cc: 'arcferrer5@gmail.com', subject: 'Welcome to Our App - Signup Confirmation')
-  end
+  # def diet_google_signup(dietitian, temporary_password)
+  #   @temporary_password = temporary_password
+  #   @dietitian = dietitian
+  #   mail(to: @dietitian.email, cc: 'arcferrer5@gmail.com', subject: 'Welcome to Our App - Signup Confirmation')
+  # end
 end

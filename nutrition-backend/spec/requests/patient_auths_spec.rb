@@ -2,6 +2,27 @@ require 'rails_helper'
 
 RSpec.describe "PatientAuths", type: :request do
   # POST Google SignIn
+  describe "POST /patient/google" do
+    it "returns a JWT on successful Google Sign-in" do
+      # Mock Google::Auth::IDTokens.verify_oidc method to return a valid user object
+      allow(Google::Auth::IDTokens).to receive(:verify_oidc).and_return(FactoryBot.build(:patient))
+
+      
+      post "/patient/google", params: { token: "GOOGLE_ACCESS_TOKEN" }
+      expect(response).to have_http_status(200)
+      expect(response.body).to include("token")
+    end
+
+    it "returns an error if the Google access token is invalid" do
+      # Mock Google::Auth::IDTokens.verify_oidc method to raise an exception
+      allow(Google::Auth::IDTokens).to receive(:verify_oidc).and_raise(StandardError.new('Google access token is invalid'))
+
+      post "/patient/google", params: { token: "INVALID_GOOGLE_ACCESS_TOKEN" }
+
+      expect(response).to have_http_status(422)
+      expect(response.body).to include("Google access token is invalid")
+    end
+  end
 
   # POST Patient Signup
   describe "POST /patient/signup" do
