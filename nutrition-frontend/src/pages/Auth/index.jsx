@@ -4,8 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import Spinner from '../../components/Spinner';
+import { useApiUrl } from '../../ApiContext';
 
 function Auth(props) {
+    const apiUrl = useApiUrl();
 
     const { setCurrentUser, loading, setLoading } = props;
 
@@ -29,10 +31,9 @@ function Auth(props) {
         setLoading(true);
 
         try {
-            const patientResponse = await axios.post('https://nutri-avion.onrender.com/patient/login', loginFormData);
+            const patientResponse = await axios.post(`${apiUrl}/patient/login`, loginFormData);
             const data = patientResponse.data;
             setCurrentUser({data});
-            console.log(data);
             setLoading(false);
             alert('Signed in successfully!');
             setLoginFormData({
@@ -42,10 +43,9 @@ function Auth(props) {
             navigate('/');
         }catch (patientError) {
             try {
-                const dietitianResponse = await axios.post('https://nutri-avion.onrender.com/dietitian/login', loginFormData);
+                const dietitianResponse = await axios.post(`${apiUrl}/dietitian/login`, loginFormData);
                 const data = dietitianResponse.data;
                 setCurrentUser({data});
-                console.log(data);
                 alert('Signed in successfully!');
                 setLoginFormData({
                     email: '',

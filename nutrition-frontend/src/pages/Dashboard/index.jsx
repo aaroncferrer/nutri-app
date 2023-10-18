@@ -5,8 +5,10 @@ import RecordModal from '../../components/RecordModal';
 import ProfileDash from '../../components/ProfileDash';
 import Spinner from '../../components/Spinner';
 import { useNavigate } from 'react-router-dom';
+import { useApiUrl } from '../../ApiContext';
 
 function Dashboard(props) {
+    const apiUrl = useApiUrl();
 
     const { currentUser, loading, setLoading } = props;
     const navigate = useNavigate();
@@ -31,7 +33,7 @@ function Dashboard(props) {
         setLoading(true);
         setSelectedAppointmentId(appointmentId);
         try{
-            const response = await axios.get(`https://nutri-avion.onrender.com/appointments/${appointmentId}/records`,
+            const response = await axios.get(`${apiUrl}/appointments/${appointmentId}/records`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -60,7 +62,7 @@ function Dashboard(props) {
         setLoading(true);
         
         try{
-            const response = await axios.post(`https://nutri-avion.onrender.com/appointments/${selectedAppointmentId}/records`,
+            const response = await axios.post(`${apiUrl}/appointments/${selectedAppointmentId}/records`,
             {
                 record: recordForm
             },
@@ -88,7 +90,7 @@ function Dashboard(props) {
         setLoading(true);
         const fetchAppointments = async () => {
             try{
-                const response = await axios.get('https://nutri-avion.onrender.com/appointments', 
+                const response = await axios.get(`${apiUrl}/appointments`, 
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -97,7 +99,6 @@ function Dashboard(props) {
                 const data = response.data;
                 setAppointments(data);
                 setLoading(false);
-                console.log(data);
             }catch(error){
                 console.error(error);
             }

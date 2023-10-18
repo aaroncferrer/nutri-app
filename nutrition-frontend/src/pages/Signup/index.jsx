@@ -5,8 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import Spinner from '../../components/Spinner';
+import { useApiUrl } from '../../ApiContext';
 
 function Signup(props) {
+    const apiUrl = useApiUrl();
 
     const { setCurrentUser, loading, setLoading } = props;
 
@@ -33,14 +35,13 @@ function Signup(props) {
         setLoading(true);
 
         try{
-            const response = await axios.post('https://nutri-avion.onrender.com/patient/signup', 
+            const response = await axios.post(`${apiUrl}/patient/signup`, 
             {
                 patient: signupFormData
             })
             const data = response.data;
             setLoading(false);
             alert(`Signup successful! Welcome to the community ${data.given_name}`)
-            console.log(data);
             setSignupFormData({
                 given_name: '',
                 family_name: '',

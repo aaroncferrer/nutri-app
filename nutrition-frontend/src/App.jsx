@@ -14,8 +14,11 @@ import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import Services from "./pages/Services";
 import Dashboard from "./pages/Dashboard";
+import { ApiProvider } from "./ApiContext";
 
 function App() {
+	const apiUrl = import.meta.env.VITE_REACT_APP_API_URL; 
+
 	const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser')) || null)
 	const [loading, setLoading] = useState(false);
 
@@ -29,6 +32,7 @@ function App() {
 
 
 	return (
+		<ApiProvider apiUrl={apiUrl}>
 		<Router>	
 			<NavHeader 
 				currentUser={currentUser}
@@ -56,6 +60,7 @@ function App() {
 			</Routes>
 			<Footer />
 		</Router>
+		</ApiProvider>
 	)
 }
 

@@ -2,8 +2,11 @@ import './landingServices.css'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useApiUrl } from '../../ApiContext';
 
 function LandingServices() {
+    const apiUrl = useApiUrl();
+
     const navigate = useNavigate();
 
     const [eventTypes, setEventTypes] = useState([]);
@@ -11,9 +14,8 @@ function LandingServices() {
 	useEffect(() => {
 		const fetchEventTypes = async () => {
 		try {
-			const response = await axios.get('https://nutri-avion.onrender.com/get_user_event_types');
+			const response = await axios.get(`${apiUrl}/get_user_event_types`);
 			setEventTypes(response.data.collection);
-			console.log(response.data.collection)
 		} catch (error) {
 			console.error('Error fetching event types:', error);
 		}
