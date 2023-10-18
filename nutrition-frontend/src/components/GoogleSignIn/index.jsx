@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useApiUrl } from "../../ApiContext";
 
 function GoogleSignIn(props) {
+	const apiUrl = useApiUrl();
 
 	const { setCurrentUser, setLoading } = props;
 
@@ -15,9 +17,8 @@ function GoogleSignIn(props) {
 		if (result.credential) {
 			const params = { token: result.credential };
 			try {
-				const patientResponse = await axios.post('https://nutri-avion.onrender.com/patient/google', params);
+				const patientResponse = await axios.post(`${apiUrl}/patient/google`, params);
 				const data = patientResponse.data;
-				console.log(data);
 				setLoading(false);
 				alert('Signed in successfully as a patient!');
 				setCurrentUser({data});
@@ -26,9 +27,8 @@ function GoogleSignIn(props) {
 				console.error('Patient sign-in failed:', patientError);
 				try{
 				// Attempt to sign in as a dietitian
-					const dietitianResponse = await axios.post('https://nutri-avion.onrender.com/dietitian/google', params);
+					const dietitianResponse = await axios.post(`${apiUrl}/dietitian/google`, params);
 					const data = dietitianResponse.data;
-					console.log(data);
 					setLoading(false);
 					alert('Signed in successfully as a dietitian!');
 					setCurrentUser({data});

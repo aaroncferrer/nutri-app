@@ -8,7 +8,6 @@ function Services({currentUser}) {
     }, []);
 
     const services = servicesData.services;
-    console.log(services)
 
     return(
         <>

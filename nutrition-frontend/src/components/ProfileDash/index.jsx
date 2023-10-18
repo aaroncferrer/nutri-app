@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spinner from '../Spinner';
 import Modal from 'react-bootstrap/Modal';
+import { useApiUrl } from '../../ApiContext';
 
 function ProfileDash(props) {
+    const apiUrl = useApiUrl();
 
     const { currentUser, userRole, userId, token, loading, setLoading } = props;
 
@@ -30,7 +32,7 @@ function ProfileDash(props) {
         setLoading(true);
 
         try {
-            const response = await axios.patch(`https://nutri-avion.onrender.com/patients/${userId}`,   
+            const response = await axios.patch(`${apiUrl}/patients/${userId}`,   
                 {
                     patient: formData,
                 },
@@ -62,7 +64,7 @@ function ProfileDash(props) {
         setLoading(true);
         const fetchUserDetails = async () => {
             try{
-                const response = await axios.get(`https://nutri-avion.onrender.com/${userRole}s/${userId}`, 
+                const response = await axios.get(`${apiUrl}/${userRole}s/${userId}`, 
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -71,7 +73,6 @@ function ProfileDash(props) {
                 const data = response.data;
                 setUserDetails(data);
                 setLoading(false);
-                console.log(data);
             }catch(error){
                 console.error(error);
             }
